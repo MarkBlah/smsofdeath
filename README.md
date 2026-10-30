@@ -27,14 +27,14 @@ emergency calls, with no interaction from the victim.
 ./gradlew assembleDebug
 ```
 
-Output: `app/build/outputs/apk/debug/app-debug.apk`
-
-Requires an Android SDK. Create `local.properties` with your SDK path (Android Studio
-does this automatically):
+Requires Android SDK. Create `local.properties` with your SDK path *(Android Studio
+does this automatically)*:
 
 ```
 sdk.dir=/path/to/Android/sdk
 ```
+**Retrieve the built** `.apk` in the `app/build/outputs/apk/debug/` **directory**.
+
 <details>
   <summary>📸 Click to View Screenshot of App</summary>
   <br><p align="center">
@@ -45,18 +45,54 @@ sdk.dir=/path/to/Android/sdk
 
 ## Use
 
-Install on a sender device, enter (or auto-fill from an active SIM) the target number,
-pick the sending SIM, and tap **SEND CRASH SMS**. Observe on the target:
+Install on a sender device, enter *(or auto-fill from an active SIM)* the target number,
+pick the sending SIM, and tap **EXECUTE WAP PUSH CRASH**. 
 
+### Observe on the target:
 ```
 adb logcat | grep -E 'NegativeArraySize|WapPushOverSms|com.android.phone'
 ```
 
-Expected: `FATAL EXCEPTION` in `com.android.phone` within ~1–2s and a PID change for
+**Expected**: `FATAL EXCEPTION` in `com.android.phone` within ~1–2s and a PID change for
 that process, with a brief loss of signal.
 
 - `minSdk` 30, `targetSdk`/`compileSdk` 35.
 - Requires `SEND_SMS`, `READ_PHONE_NUMBERS`, `READ_PHONE_STATE`.
+
+---
+
+## Workaround / Fix
+
+Run each step over ADB during the short window after boot completes *(adb shell getprop sys.boot_completed returns 1)*.
+
+#### Find the bad entries. Look for WAP Push rows *(destination_port=134020)* and note their address:
+```
+adb shell content query --uri content://sms/raw --projection _id:destination_port:date:deleted
+```
+#### Allow the shell to edit SMS storage:
+```
+adb shell cmd appops set com.android.shell WRITE_SMS allow
+```
+#### Delete only those entries. Replace <SENDER> with the address from step 1:
+```
+adb shell "content delete --uri content://sms/raw --where \"address='<SENDER>'\""
+```
+-  Check that they're gone by re-running the query from step 1.
+
+#### Reset the permission:
+```
+adb shell cmd appops set com.android.shell WRITE_SMS default
+```
+-  No factory reset is needed. Don't choose wipe at the recovery prompt.
+
+### Last resort:
+Which erases all SMS/MMS and APN settings:
+```
+adb shell pm clear com.android.providers.telephony
+```
+
+### Expected behavior:
+A WAP Push PDU with an invalid length should be dropped and removed from the raw queue, not crash `com.android.phone` and put the device into a reboot loop.
 
 ---
 
