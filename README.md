@@ -1,3 +1,7 @@
+<p align="center">
+<img width="613" height="429" alt="Screenshot 2026-10-30 at 1 05 09 PM" src="https://github.com/user-attachments/assets/1bf927fe-0443-43f5-a529-e32e02bbc92f" />
+
+
 # WAP Push Remote Modem Crash (PoC)
 
 Proof-of-concept Android app that sends a crafted 8-byte WAP Push PDU over SMS to a
