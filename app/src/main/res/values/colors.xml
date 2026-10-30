@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="lab_bg">#121619</color>
+    <color name="lab_card">#1E222B</color>
+    <color name="lab_accent">#FF8C00</color>
+    <color name="lab_red">#DC2626</color>
+</resources>

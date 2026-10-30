@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#090909"
+    android:fillViewport="true"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- Top Title -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="48dp"
+            android:layout_marginBottom="12dp"
+            android:fontFamily="@font/orbitron"
+            android:gravity="center"
+            android:text="Zero-Click Silent Modem Crash"
+            android:textColor="#2CCDD0"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <!-- Header / Banner -->
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="match_parent"
+            android:layout_height="210dp"
+            android:layout_marginTop="4dp"
+            android:src="@drawable/screenshot_2026_10_30_at_1_05_09pm" />
+
+        <!-- Subtitle under logo -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="12dp"
+            android:fontFamily="@font/orbitron"
+            android:gravity="center"
+            android:text="Android Radio &amp; Telephony Exploit"
+            android:textColor="#F8F5F5"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
+        <!-- Card: Target Configuration -->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:background="#0B0B0B"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/orbitron"
+                android:text="TARGET PHONE NUMBER"
+                android:textColor="#2CCDD0"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/phoneInput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:backgroundTint="#46D197"
+                android:fontFamily="monospace"
+                android:hint="e.g. 0401234567"
+                android:inputType="phone"
+                android:textColor="#FFFFFF"
+                android:textColorHint="#646875"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+        <!-- Card: SIM / Interface Selection -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:background="#0D0D0D"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/orbitron"
+                android:text="TRANSMITTER SIM / SUB_ID"
+                android:textColor="#2CCDD0"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+            <Spinner
+                android:id="@+id/senderSpinner"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginTop="8dp"
+                android:backgroundTint="#47CE81" />
+        </LinearLayout>
+
+        <!-- Action Button -->
+        <Button
+            android:id="@+id/sendBtn"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_marginBottom="16dp"
+            android:backgroundTint="@color/lab_red"
+            android:fontFamily="@font/orbitron"
+            android:letterSpacing="0.15"
+            android:text="EXECUTE WAP PUSH CRASH"
+            android:textAlignment="viewStart"
+            android:textColor="#FAF8F8"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+        <!-- Console / Telemetry Log -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#090909"
+            android:minHeight="150dp"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:fontFamily="@font/orbitron"
+                android:text="[ TELEMETRY &amp; CONSOLE LOG ]"
+                android:textColor="#2CCDD0"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/status"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="monospace"
+                android:lineSpacingExtra="4dp"
+                android:text="System initialized. Awaiting user command..."
+                android:textColor="#ABB4BF"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>

@@ -8,15 +8,11 @@ import android.os.Bundle;
 import android.telephony.SmsManager;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
-import android.text.InputType;
-import android.view.ViewGroup.LayoutParams;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
-import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -50,49 +46,13 @@ public class MainActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
 
-        // Android 15+ enforces edge-to-edge — system status bar is transparent and shows
-        // the window background through it. Set window+root background to gray so the
-        // status bar reads gray, making the signal-bar/no-service indicator obvious
-        // when com.android.phone dies after the WAP Push.
-        getWindow().getDecorView().setBackgroundColor(0xFFB0B0B0);
-
-        LinearLayout root = new LinearLayout(this);
-        root.setOrientation(LinearLayout.VERTICAL);
-        root.setBackgroundColor(0xFFB0B0B0);
-        root.setPadding(48, 480, 48, 48);
-
-        TextView destLabel = new TextView(this);
-        destLabel.setText("Target phone number:");
-        root.addView(destLabel);
-
-        phoneInput = new EditText(this);
-        phoneInput.setHint("e.g. 0401234567");
-        phoneInput.setInputType(InputType.TYPE_CLASS_PHONE);
-        root.addView(phoneInput);
-
-        TextView senderLabel = new TextView(this);
-        senderLabel.setText("Send from SIM:");
-        senderLabel.setPadding(0, 24, 0, 0);
-        root.addView(senderLabel);
-
-        senderSpinner = new Spinner(this);
-        root.addView(senderSpinner);
-
-        Button sendBtn = new Button(this);
-        sendBtn.setText("SEND CRASH SMS");
-        sendBtn.setPadding(0, 32, 0, 32);
+        phoneInput = findViewById(R.id.phoneInput);
+        senderSpinner = findViewById(R.id.senderSpinner);
+        status = findViewById(R.id.status);
+        Button sendBtn = findViewById(R.id.sendBtn);
         sendBtn.setOnClickListener(v -> sendCrashSms());
-        root.addView(sendBtn);
-
-        status = new TextView(this);
-        status.setPadding(0, 24, 0, 0);
-        status.setTextSize(12);
-        root.addView(status);
-
-        ScrollView scroll = new ScrollView(this);
-        scroll.addView(root, new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
-        setContentView(scroll);
 
         requestPermissions(new String[] {
             Manifest.permission.SEND_SMS,
