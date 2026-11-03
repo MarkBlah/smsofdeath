@@ -16,6 +16,7 @@ emergency calls, with no interaction from the victim.
 
 ## Build
 
+### On Linux/Mac
 ```
 ./gradlew assembleDebug
 ```
@@ -28,6 +29,20 @@ does this automatically):
 ```
 sdk.dir=/path/to/Android/sdk
 ```
+
+### Using GitHub Codespaces
+
+Create codespaces based on the configuration.
+Wait for Codespace to get booted up and run it's script.
+Run:
+```
+chmod +x gradlew
+./gradlew assembleDebug
+```
+
+Output: `app/build/outputs/apk/debug/app-debug.apk` (Right Click and download)
+
+Requires an Android SDK. ( 'setup-android.sh' Script handles it)
 
 ## Use
 
