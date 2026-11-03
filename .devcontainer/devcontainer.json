@@ -1,0 +1,8 @@
+{
+  "name": "Android Codespace with Java & Android ID",
+  "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+  "features": {
+    "ghcr.io/devcontainers/features/common-utils:1": {}
+  },
+  "postCreateCommand": "bash .devcontainer/setup-android.sh"
+}
